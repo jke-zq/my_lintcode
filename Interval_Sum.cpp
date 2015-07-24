@@ -1,3 +1,13 @@
+
+/**
+*  NOTE:
+*  waste me lots of time to find two lines lost:
+*            root->left = left;
+*            root->right = right;
+*
+*/
+
+
 /**
  * Definition of Interval:
  * classs Interval {
@@ -40,7 +50,7 @@ public:
         if(end > start){
             BSTreeNode* root = new BSTreeNode(start, end);
             BSTreeNode* left = buildBSTreeNode(A, start, start + (end - start) / 2);
-            BSTreeNode* right = buildBSTreeNode(A, start + (end - start) / 2 + 1, end);
+            BSTreeNode* right = buildBSTreeNode(A, start + (end - start) / 2 + 1, end);            
             root->left = left;
             root->right = right;
             root->sum = left->sum + right->sum;
