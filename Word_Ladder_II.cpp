@@ -87,6 +87,7 @@ public:
         int current_level = 0;
         levels[current_level].insert(start);
         unordered_map<string, unordered_set<string>> trace;
+        //dict.size() > 0  this condition can be removed becasuse of there must be one solution.
         while (dict.size() > 0 && levels[current_level % 2].size() > 0)
         {
             if (levels[current_level % 2].count(end) > 0)
