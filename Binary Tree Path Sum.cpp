@@ -24,30 +24,52 @@ public:
         doFind(0, root, tmp, ret, target);
         return ret;
     }
+
+    //In my opinion, this is better than the one below
     void doFind(int sum, TreeNode *root, vector<int> &tmp, vector<vector<int>> &ret, int target)
     {
         if (!root)
         {
-            if (sum == target)
-            {
-                ret.emplace_back(tmp);   
-            }
             return;
         }
         else
         {
             tmp.emplace_back(root->val);
-            if (!root->left && !root->right)
+            if (sum + root->val == target && !root->left && !root->right)
             {
-                doFind(sum + root->val, root->left, tmp, ret, target);
+                ret.emplace_back(tmp);   
             }
-            else
-            {
-                doFind(sum + root->val, root->left, tmp, ret, target);
-                doFind(sum + root->val, root->right, tmp, ret, target);                
-            }
+            doFind(sum + root->val, root->left, tmp, ret, target);
+            doFind(sum + root->val, root->right, tmp, ret, target);                
             tmp.pop_back();
         }
         
     }
+    
+    // void doFind(int sum, TreeNode *root, vector<int> &tmp, vector<vector<int>> &ret, int target)
+    // {
+    //     if (!root)
+    //     {
+    //         if (sum == target)
+    //         {
+    //             ret.emplace_back(tmp);   
+    //         }
+    //         return;
+    //     }
+    //     else
+    //     {
+    //         tmp.emplace_back(root->val);
+    //         if (!root->left && !root->right)
+    //         {
+    //             doFind(sum + root->val, root->left, tmp, ret, target);
+    //         }
+    //         else
+    //         {
+    //             doFind(sum + root->val, root->left, tmp, ret, target);
+    //             doFind(sum + root->val, root->right, tmp, ret, target);                
+    //         }
+    //         tmp.pop_back();
+    //     }
+        
+    // }
 };
