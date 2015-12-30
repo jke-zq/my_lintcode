@@ -12,8 +12,8 @@ public:
     }
 };
 class Solution {
-private:
-    SegmentTreeSumNode *root_;
+// private:
+    // SegmentTreeSumNode *root_;
 public:
     /* you may need to use some attributes here */
     
@@ -21,9 +21,14 @@ public:
     /**
      * @param A: An integer vector
      */
-    Solution(vector<int> A) {
+    Solution(vector<int> A):nums_(A) {
         // write your code here
-        root_ = build(0, A.size() - 1, A);
+        // root_ = build(0, A.size() - 1, A);
+        bit_sum_ = vector<int>(nums_.size() + 1);
+        for (int i = 0; i < nums_.size(); ++i)
+        {
+            add(i, nums_[i]);
+        }
     }
     
     /**
@@ -32,7 +37,13 @@ public:
      */
     long long query(int start, int end) {
         // write your code here
-        return query(start, end, root_);
+        // return query(start, end, root_);
+        int sum = sumRegin_bit(end);
+        if (start > 0)
+        {
+            sum -= sumRegin_bit(start - 1);
+        }
+        return sum;
     }
     
     long long query(int start, int end, SegmentTreeSumNode *node)
@@ -57,7 +68,9 @@ public:
      */
     void modify(int index, int value) {
         // write your code here
-        modify(index, value, root_);
+        // modify(index, value, root_);
+        add(index, value - nums_[index]);
+        nums_[index] = value;
     }
     
     long long modify(int index, int value, SegmentTreeSumNode *node)
@@ -105,5 +118,32 @@ public:
                 return root;
             }
         }
+    }
+    //solution II
+    //hard to understand.
+private:
+    vector<int> nums_;
+    vector<int> bit_sum_;
+    int sumRegin_bit(int i)
+    {
+        ++i;
+        int sum = 0;
+        for(;i > 0; i -= lower_bit(i))
+        {
+            sum += bit_sum_[i];
+        }
+        return sum;
+    }
+    void add(int i, int value)
+    {
+        ++i;
+        for(; i < bit_sum_.size(); i += lower_bit(i))
+        {
+            bit_sum_[i] += value;
+        }
+    }
+    int lower_bit(int i)
+    {
+        return i & -i;
     }
 };
