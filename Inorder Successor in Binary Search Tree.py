@@ -13,30 +13,28 @@ class Solution(object):
     """
     def inorderSuccessor(self, root, p):
         # write your code here
+        
         if not root:
             return None
-        
-        nodes = []
-        node = root
-        while node and node.val != p.val:
-            nodes.append(node)
-            if node.val > p.val:
+
+        if p.right:
+            node = p.right
+            while node and node.left:
                 node = node.left
-            else:
-                node = node.right
-        
-        if not root:
-            return None
+            return node
         else:
-            if node.right:
-                node = node.right
-                while node and node.left:
+            nodes = []
+            node = root
+            while node.val != p.val:
+                nodes.append(node)
+                if node.val < p.val:
+                    node = node.right
+                else:
                     node = node.left
-                return node
             for n in nodes[::-1]:
                 if n.val > p.val:
                     return n
             return None
-            
+
                     
-            
+                    
