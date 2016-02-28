@@ -32,9 +32,17 @@ class Solution:
             else:
                 left = mid
                 
-        if A[left] == target:
-            ret[1] = left
+        ##error
+        # if A[left] == target:
+        #     ret[1] = left
+        # if A[right] == target:
+        #     ret[1] = right
         if A[right] == target:
             ret[1] = right
+        elif A[left] == target:
+            ret[1] = left
+
         return ret
+if __name__ == '__main__':
+    print Solution().searchRange([1,2 , 4], 8)
         

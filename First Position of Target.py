@@ -28,10 +28,11 @@ class Solution:
                 else:
                     left = mid
 
-            if nums[right] == target:
-                return right
-            elif nums[left] == target:
+            ##first->we should check the most left size: left of index.
+            if nums[left] == target:
                 return left
+            elif nums[right] == target:
+                return right
             else:
                 return -1
             

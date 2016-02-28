@@ -6,9 +6,9 @@ class Solution:
         
         left, right = 0, len(num) - 1
         while left + 1 < right:
+            mid = left + (right - left) / 2
             while left + 1 < right and num[left] == num[right]:
                 left += 1
-            mid = left + (right - left) / 2
             if num[mid] <= num[right]:
                 right = mid
             else:
