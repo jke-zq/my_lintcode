@@ -34,12 +34,15 @@ class Solution:
         for node in nodes:
             for nei in node.neighbors:
                 union(fathers, node.label, nei.label)
-        # compress the path
-        for key in nodes:
-            compressFind(fathers, key.label)
+        # # compress the path
+        # for key in nodes:
+        #     compressFind(fathers, key.label)
+        # ret = collections.defaultdict(list)
+        # for k, v in fathers.items():
+        #     ret[v].append(k)
+        ## other way -- good
         ret = collections.defaultdict(list)
-        for k, v in fathers.items():
-            ret[v].append(k)
-        
+        for k in fathers:
+            fa = compressFind(fathers, k)
+            ret[fa].append(k)
         return [sorted(v) for v in ret.values()]
-        
