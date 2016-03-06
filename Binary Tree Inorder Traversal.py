@@ -26,18 +26,30 @@ class Solution:
         # doTra(root, ret)
         # return ret
         
-        ret = []
-        stack = []
-        node = root
-        while node:
-            stack.append(node)
-            node = node.left
-        while stack:
-            node = stack.pop()
-            ret.append(node.val)
-            if node.right:
-                node = node.right
-                while node:
-                    stack.append(node)
-                    node = node.left
+        # ret = []
+        # stack = []
+        # node = root
+        # while node:
+        #     stack.append(node)
+        #     node = node.left
+        # while stack:
+        #     node = stack.pop()
+        #     ret.append(node.val)
+        #     if node.right:
+        #         node = node.right
+        #         while node:
+        #             stack.append(node)
+        #             node = node.left
+        # return ret
+        if not root:
+            return []
+        stack, ret = [], []
+        cur = root
+        while stack or cur:
+            while cur:
+                stack.append(cur)
+                cur = cur.left
+            cur = stack.pop()
+            ret.append(cur.val)
+            cur = cur.right
         return ret

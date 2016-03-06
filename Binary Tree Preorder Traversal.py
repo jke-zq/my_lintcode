@@ -26,24 +26,36 @@ class Solution:
         # doTrav(root, ret)
         # return ret
                 
+        # if not root:
+        #     return []
+        
+        # ret = []
+        # node = root
+        # stack = []
+        # while node:
+        #     stack.append(node)
+        #     ret.append(node.val)
+        #     node = node.left
+        # while stack:
+        #     node = stack.pop()
+        #     # ret.append(node.val)
+        #     if node.right:
+        #         node = node.right
+        #         while node:
+        #             stack.append(node)
+        #             ret.append(node.val)
+        #             node = node.left
+        # return ret
         if not root:
             return []
-        
+        stack = [root]
         ret = []
-        node = root
-        stack = []
-        while node:
-            stack.append(node)
-            ret.append(node.val)
-            node = node.left
         while stack:
-            node = stack.pop()
-            # ret.append(node.val)
-            if node.right:
-                node = node.right
-                while node:
-                    stack.append(node)
-                    ret.append(node.val)
-                    node = node.left
+            cur = stack.pop()
+            ret.append(cur.val)
+            if cur.right:
+                stack.append(cur.right)
+            if cur.left:
+                stack.append(cur.left)
         return ret
-        
+                
