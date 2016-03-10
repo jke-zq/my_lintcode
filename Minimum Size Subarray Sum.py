@@ -4,19 +4,25 @@ class Solution:
      # @return: an integer representing the minimum size of subarray
     def minimumSize(self, nums, s):
         # write your code here
-        ## TLE
-        # if not nums:
-        #     return -1
-        # length = len(nums)
-        # ret = float('inf')
-        # for i in range(length):
-        #     total = 0
-        #     j = i
-        #     while j < length:
-        #         total += nums[j]
-        #         if total < s:
-        #             j += 1
-        #         else:
-        #             ret = min(ret, j - i + 1)
-        #             break
-        # return -1 if ret == float('inf') else ret
+        if not nums:
+            return -1
+        length = len(nums)
+        ret = float('inf')
+        total = 0
+        j = 0
+        for i in range(length):
+            total += nums[i]
+            # while total >= s:
+            #     ret = min(ret, i - j + 1)
+            #     total -= nums[j]
+            #     j += 1
+            ## templet
+            while j <= i:
+                if total >= s:
+                    ret = min(ret, i - j + 1)
+                    total -= nums[j]
+                    j += 1
+                else:
+                    break
+            
+        return -1 if ret == float('inf') else ret
