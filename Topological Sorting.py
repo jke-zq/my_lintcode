@@ -20,8 +20,8 @@ class Solution:
             return None
         dicts = collections.defaultdict(int) # node:indegree
         for g in graph:
-            if g not in dicts:
-                dicts[g] = 0
+            # if g not in dicts:
+            #     dicts[g] = 0
             for gnb in g.neighbors:
                 dicts[gnb] += 1
         

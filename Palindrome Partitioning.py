@@ -6,12 +6,13 @@ class Solution:
         def helper(start, length, tmp, ret, s):
             if start == length:
                 ret.append(tmp[:])
-            else:
-                for i in range(start, length):
-                    if check(start, i, s):
-                        tmp.append(s[start:i + 1])
-                        helper(i + 1, length, tmp, ret, s)
-                        tmp.pop()
+                return
+            # else:
+            for i in range(start, length):
+                if check(start, i, s):
+                    tmp.append(s[start:i + 1])
+                    helper(i + 1, length, tmp, ret, s)
+                    tmp.pop()
         def check(start, end, s):
             while start < end:
                 if s[start] != s[end]:

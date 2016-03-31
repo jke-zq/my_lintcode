@@ -10,17 +10,17 @@ class Solution:
             if left == 0:
                 ret.append(tmp[:])
                 return
-            else:
-                for i in range(start, length):
-                    if i > start and candidates[i] == candidates[i - 1]:
-                        continue
-                    else:
-                        if candidates[i] > left:
-                            continue
-                        else:
-                            tmp.append(candidates[i])
-                            helper(i + 1, left - candidates[i], tmp, ret, candidates, length)
-                            tmp.pop()
+            # else:
+            for i in range(start, length):
+                if i > start and candidates[i] == candidates[i - 1]:
+                    continue
+                # else:
+                if candidates[i] > left:
+                    continue
+                else:
+                    tmp.append(candidates[i])
+                    helper(i + 1, left - candidates[i], tmp, ret, candidates, length)
+                    tmp.pop()
         
         
         if not candidates:
