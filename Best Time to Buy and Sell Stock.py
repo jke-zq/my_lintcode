@@ -8,11 +8,11 @@ class Solution:
         
         if not prices or len(prices) == 1:
             return 0
-        i = prices[0]
-        ret = 0
-        for p in prices[1:]:
+        i = float('inf')
+        ret = float('-inf')
+        for p in prices:
             if i > p:
                 i = p
             else:
                 ret = max(ret, p - i)
-        return ret
+        return max(ret, 0)

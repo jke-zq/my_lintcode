@@ -7,16 +7,16 @@ class Solution:
         # write your code here
         if not prices or len(prices) == 1:
             return 0
-        i = prices[0]
+        i = float('inf')
         ret = 0
-        for p in prices[1:]:
+        for p in prices:
             if i < p:
                 ret += p - i
                 ## after sold, reset i with p
                 i = p
             else:
                 i = p
-        return ret
+        return max(ret, 0)
 
 
 maximum sum subarray:

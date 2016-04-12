@@ -37,6 +37,6 @@ class Solution:
             globalMax = max(localMax, globalMax)
             rightMaxs[i] = globalMax 
         ans = float('-inf')
-        for i in range(0, length - 1):
+        for i in range(length - 1):
             ans = max(ans, abs(leftMins[i] - rightMaxs[i + 1]), abs(leftMaxs[i] - rightMins[i + 1]))
         return ans
