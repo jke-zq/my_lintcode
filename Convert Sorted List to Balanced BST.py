@@ -38,11 +38,12 @@ class Solution:
         
         # cur = head
         def helper(start, end):
-            if start >= end:
+            if start > end:
                 return None
             mid = start + (end - start) / 2
             left = helper(start, mid)
             # Using variable 'cur' before assignment (used-before-assignment)
+            ## 闭包中不可以改变变量的值， 使用类中全局变量（加上self）
             root = TreeNode(cur.val)
             root.left = left
             cur = cur.next

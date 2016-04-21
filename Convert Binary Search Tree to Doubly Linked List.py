@@ -24,17 +24,18 @@ class Solution:
             if not treeNode:
                 return (None, None)
             
-            (minLeft, maxLeft) = helper(treeNode.left)
             midle = DoublyListNode(treeNode.val)
+            minRet, maxRet = midle, midle
+            (minLeft, maxLeft) = helper(treeNode.left)
             midle.pre = maxLeft
             if maxLeft:
-                maxLeft.next = midle
+                minRet, maxLeft.next = minLeft, midle
             (minRight, maxRight) = helper(treeNode.right)
             midle.next = minRight
             if minRight:
-                minRight.pre = midle
-            minRet = midle if not minLeft else minLeft
-            maxRet = midle if not maxRight else maxRight
+                maxRet, minRight.pre = maxRight, midle
+            # minRet = midle if not minLeft else minLeft
+            # maxRet = midle if not maxRight else maxRight
             return (minRet, maxRet)
         
         return helper(root)[0]
