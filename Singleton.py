@@ -11,9 +11,10 @@ class Solution:
         # return cls.instance
         
         if cls.instance is None:
-            cls.mutex.acquire()
-            if cls.instance is None:
-                cls.instance = cls()
-            cls.mutex.release()
+            with cls.mutex:
+            # cls.mutex.acquire()
+                if cls.instance is None:
+                    cls.instance = cls()
+            # cls.mutex.release()
         
         return cls.instance
