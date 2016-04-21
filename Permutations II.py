@@ -10,15 +10,16 @@ class Solution:
                 ret.append(tmp[::])
             else:
                 for i in range(length):
-                    if not visited[i]:
-                        if i > 0 and nums[i] == nums[i - 1] and not visited[i - 1]:
-                            continue
-                        else:
-                            tmp.append(nums[i])
-                            visited[i] = True
-                            helper(left - 1, visited, tmp, ret, length)
-                            visited[i] = False
-                            tmp.pop()
+                    if visited[i]:
+                        continue
+                    if i > 0 and nums[i] == nums[i - 1] and not visited[i - 1]:
+                        continue
+                    else:
+                        tmp.append(nums[i])
+                        visited[i] = True
+                        helper(left - 1, visited, tmp, ret, length)
+                        visited[i] = False
+                        tmp.pop()
         if not nums:
             return []
         nums.sort()
