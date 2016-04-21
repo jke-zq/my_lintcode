@@ -84,6 +84,6 @@ class Solution:
                         cur.next = list2
                     listNode.append(dummy.next)
                     # dummy.next = None
-            if length == 1:
-                listNode.append(listNode.pop(0))
+            # if length == 1:
+            #     listNode.append(listNode.pop(0))
         return listNode[0]
