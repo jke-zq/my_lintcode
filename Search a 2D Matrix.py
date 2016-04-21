@@ -1,65 +1,53 @@
 class Solution:
     """
-    @param matrix, a list of lists of integers
-    @param target, an integer
-    @return a boolean, indicate whether matrix contains target
+    @param matrix: An list of lists of integers
+    @param target: An integer you want to search in matrix
+    @return: An integer indicates the total occurrence of target in the given matrix
     """
     def searchMatrix(self, matrix, target):
         # write your code here
-        # if not matrix or not matrix[0]:
-        #     return False
         
-        # left, right = 0, len(matrix) - 1
+        # if not matrix:
+        #     return 0
+        # m, n = len(matrix), len(matrix[0])
+        # left, right = 0, n - 1
         # while left + 1 < right:
         #     mid = left + (right - left) / 2
-        #     if matrix[mid][0] > target:
-        #         right = mid
-        #     elif matrix[mid][0] < target:
+        #     if matrix[m - 1][mid] < target:
         #         left = mid
         #     else:
-        #         return True
-        # if matrix[left][0] > target:
-        #     return False
-        # elif matrix[left][0] == target:
-        #     return True
-        # if matrix[right][0] == target:
-        #     return True
- 
+        #         right = mid
         
-        # row = left
-        # if matrix[right][0] < target:
-        #     row = right
-        # left, right = 0, len(matrix[row]) - 1
-        # while left + 1 < right:
-        #     mid = left + (right - left) / 2
-        #     if matrix[row][mid] > target:
-        #         right = mid
-        #     elif matrix[row][mid] < target:
-        #         left = mid
+        # row, col = m - 1, right
+        # if matrix[m - 1][left] >= target:
+        #     col = left
+        
+        # ret = 0
+        # while row >= 0 and col < n:
+        #     if matrix[row][col] == target:
+        #         ret += 1
+        #         row -= 1
+        #         col += 1
+        #     elif matrix[row][col] > target:
+        #         row -= 1
         #     else:
-        #         return True
-        # if target in (matrix[row][left], matrix[row][right]):
-        #     return True
-        # return False
-        if not matrix or not matrix[0]:
-            return False
+        #         col += 1
+        # return ret
+        
+        if not matrix:
+            return 0
         m, n = len(matrix), len(matrix[0])
-        left, right = 0, m * n - 1
-        while left + 1 < right:
-            mid = left + (right - left) / 2
-            x, y = mid / n, mid % n
-            if matrix[x][y] > target:
-                right = mid
-            elif matrix[x][y] < target:
-                left = mid
+        row, col = m - 1, 0
+        ret = 0
+        while row >= 0 and col < n:
+            if matrix[row][col] == target:
+               ret += 1
+               row -= 1
+               col += 1
+            elif matrix[row][col] > target:
+                # row += 1
+                row -= 1
             else:
-                return True
-        x, y = left / n, left % n
-        if matrix[x][y] == target:
-            return True
-        x, y = right / n, right % n
-        if matrix[x][y] == target:
-            return True
-        return False
+                col += 1
+        return ret
         
-            
