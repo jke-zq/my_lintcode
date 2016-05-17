@@ -41,6 +41,28 @@ class Solution:
         #                 minLen = front - back + 1
         #                 ret = (back, front)
         ## solution two
+        # targetHash = collections.defaultdict(int)
+        # for t in target:
+        #     targetHash[t] += 1
+        # targetnum = len(target)
+        # sourcenum = 0
+        # minLen = float('inf')
+        # ret = ""
+        # j = 0
+        # for i in range(len(source)):
+        #     if targetHash[source[i]] > 0:
+        #         sourcenum += 1
+        #     targetHash[source[i]] -= 1
+        #     while sourcenum >= targetnum:
+        #         targetHash[source[j]] += 1
+        #         if targetHash[source[j]] > 0:
+        #             sourcenum -= 1
+        #         if minLen > i - j + 1:
+        #             minLen = i - j + 1
+        #             ret = source[j:i + 1]
+        #         j += 1
+        # return ret
+
         targetHash = collections.defaultdict(int)
         for t in target:
             targetHash[t] += 1
@@ -50,18 +72,18 @@ class Solution:
         ret = ""
         j = 0
         for i in range(len(source)):
-            if targetHash[source[i]] > 0:
-                sourcenum += 1
-            targetHash[source[i]] -= 1
-            while sourcenum >= targetnum:
-                targetHash[source[j]] += 1
+            while j < len(source) and sourcenum < targetnum:
                 if targetHash[source[j]] > 0:
-                    sourcenum -= 1
-                if minLen > i - j + 1:
-                    minLen = i - j + 1
-                    ret = source[j:i + 1]
+                    sourcenum += 1
+                targetHash[source[j]] -= 1
                 j += 1
+
+            if sourcenum == targetnum and minLen > j - i:
+                minLen = j - i
+                ret = source[i:j]
+            targetHash[source[i]] += 1
+            if targetHash[source[i]] > 0:
+                sourcenum -= 1
         return ret
-                
-                
-        
+            
+    
