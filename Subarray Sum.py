@@ -15,10 +15,11 @@ class Solution:
             ret[i + 1] = ret[i] + nums[i]
         
         dicts = {}
-        for i in range(1, length + 1):
-            if ret[i] == 0:
-                return [0, i - 1]
-            elif ret[i] in dicts:
+        for i in range(0, length + 1):
+            # if ret[i] == 0:
+            #     return [0, i - 1]
+            # el
+            if ret[i] in dicts:
                 ## error [dicts[ret[i]] $- 1$, i - 1]
                 return [dicts[ret[i]], i - 1]
             else:
