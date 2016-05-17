@@ -24,8 +24,8 @@ class Solution:
         for time, fly in airs:
             if fly == 1:
                 count += 1
+                ret = max(ret, count)
             else:
                 count -= 1
-            ret = max(ret, count)
+            
         return ret
-                
