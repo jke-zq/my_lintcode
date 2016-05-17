@@ -16,7 +16,7 @@ class Solution:
         # write your code here
         if root in (None, A, B):
             return root
-            
+        # left, right = map(lambda x: self.lowestCommonAncestor(x, p, q), [root.left, root.right])
         left, right = map(lambda x: self.lowestCommonAncestor(x, A, B), [root.left, root.right])
         return root if left and right else left or right
         
