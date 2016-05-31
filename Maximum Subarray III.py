@@ -102,3 +102,33 @@ class Solution:
         #             table[i][j] = max(table[i][j], table[p - 1][j - 1] + maxp)
                     
         return table[length][k]
+
+
+## Solution:
+class Solution:
+    """
+    @param nums: A list of integers
+    @param k: An integer denote to find k non-overlapping subarrays
+    @return: An integer denote the sum of max k non-overlapping subarrays
+    """
+    def maxSubArray(self, nums, k):
+        # write your code here
+        
+        if not nums:
+            return 0
+        length = len(nums)
+        local = [[float('-inf')] * (k + 1) for __ in range(1 + length)]
+        gl = [[float('-inf')] * (k + 1) for __ in range(1 + length)]
+        local[0][0] = 0
+        gl[0][0] = 0
+        for i in range(1, length + 1):
+            # diff = nums[i] - nums[i - 1]
+            local[i][0] = 0
+            gl[i][0] = 0
+            diff = nums[i - 1]
+            for j in range(1, k + 1):
+                local[i][j] = max(gl[i - 1][j - 1] + diff, local[i - 1][j] + diff)
+                gl[i][j] = max(gl[i - 1][j], local[i][j])
+        # print local
+        # print gl
+        return gl[length][k]
