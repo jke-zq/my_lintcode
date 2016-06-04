@@ -15,20 +15,38 @@ class Solution:
     def detectCycle(self, head):
         # write your code here
         
-        dummy = ListNode(-1)
-        dummy.next = head
-        fast, slow = dummy, dummy
-        while fast and fast.next:
-            fast = fast.next.next
-            slow = slow.next
-            if slow == fast:
-                break
+        # dummy = ListNode(-1)
+        # dummy.next = head
+        # fast, slow = dummy, dummy
+        # while fast and fast.next:
+        #     fast = fast.next.next
+        #     slow = slow.next
+        #     if slow == fast:
+        #         break
         
-        if not fast or not fast.next:
+        # if not fast or not fast.next:
+        #     return None
+        
+        # slow = dummy
+        # while slow != fast:
+        #     slow = slow.next
+        #     fast = fast.next
+        # return slow
+
+        #better codes
+        if not head:
             return None
-        
-        slow = dummy
-        while slow != fast:
+
+        fast, slow = head.next, head
+        while fast != slow:
+            if fast and fast.next:
+                fast = fast.next.next
+            else:
+                return None
             slow = slow.next
-            fast = fast.next
-        return slow
+
+        pre = head
+        slow = slow.next
+        while pre != slow:
+            pre, slow = pre.next, slow.next
+        return pre
