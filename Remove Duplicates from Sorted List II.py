@@ -39,6 +39,20 @@ class Solution:
             else:
                 cur = cur.next
         return dummy.next
+        # solution three
+        # dummy = ListNode(0)
+        # cur = dummy
+        # pre = head
+        # while pre:
+        #     if pre.next and pre.val == pre.next.val:
+        #         val = pre.val
+        #         while pre and pre.val == val:
+        #             pre = pre.next
+        #     else:
+        #         cur.next, cur = pre, pre
+        #         pre = pre.next
+        # cur.next = None
+        # return dummy.next
 ##解题报告
 # dummy Node 可以直接接着head，然后重新设置next指针
 # 判断是否同一类的node，根据val的大小。
