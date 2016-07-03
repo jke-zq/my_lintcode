@@ -9,8 +9,11 @@ class Solution:
         # Write your code here
         # return list(set(nums1) & set(nums2))
         # 1.What if the given array is already sorted? How would you optimize your algorithm?
+        # answer: parallel points
         # 2.What if nums1's size is small compared to num2's size? Which algorithm is better?
+        # If nums2 can be sotred in memory, find occurences of number from nums1 in nums2(firstly, sorted the nums2). len(set(nums1)) * NlgN(sorted nums2)
         # 3.What if elements of nums2 are stored on disk, and the memory is limited such that you cannot load all elements into the memory at once?
+        # split into little files
         # nums1.sort()
         # nums2.sort()
         # ans = []
