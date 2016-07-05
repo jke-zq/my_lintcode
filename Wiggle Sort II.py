@@ -58,4 +58,58 @@ class Solution(object):
         #         ret[r] = nums[i]
         #         r -= 2
         # nums[:] = ret
-        
+
+import random
+class Solution(object):
+    """
+    @param {int[]} nums a list of integer
+    @return nothing, modify nums in-place instead
+    """
+    def wiggleSort(self, nums):
+        # Write your code here
+        def findKth(nums, k):
+            length = len(nums)
+            left, right = 0, length - 1
+            while left <= right:
+                pivot = random.randint(left, right)
+                target = nums[pivot]
+                pre, start, end = left, left, right
+                while start <= end:
+                    if nums[start] > target:
+                        nums[pre], nums[start] = nums[start], nums[pre]
+                        pre += 1
+                        start += 1
+                    elif nums[start] < target:
+                        nums[start], nums[end] = nums[end], nums[start]
+                        end -= 1
+                    else:
+                        start += 1
+                if pre + 1 <= k <= end + 1:
+                    # 'nums[pre + 1]'
+                    return nums[pre]
+                elif pre + 1 > k:
+                    right = pre
+                else:
+                    left = end
+
+        length = len(nums)
+        transfer = lambda x: (2 * x + 1) % (length | 1)
+        # nums.sort()
+        # target = nums[length / 2]
+        # error1: length / 2 '+ 1'
+        target = findKth(nums, length / 2 + 1)
+        left, right = 0, length - 1
+        pre = left
+        while left <= right:
+            tleft = transfer(left)
+            if nums[tleft] > target:
+                tpre = transfer(pre)
+                nums[tleft], nums[tpre] = nums[tpre], nums[tleft]
+                left += 1
+                pre += 1
+            elif nums[tleft] < target:
+                tright = transfer(right)
+                nums[tleft], nums[tright] = nums[tright], nums[tleft]
+                right -= 1
+            else:
+                left += 1
