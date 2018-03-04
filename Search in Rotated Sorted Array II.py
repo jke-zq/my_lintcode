@@ -6,12 +6,12 @@ class Solution:
     """
     def search(self, A, target):
         # write your code here
-        
+
         if not A:
             return False
         left, right = 0, len(A) - 1
         while left + 1 < right:
-            
+
             while left + 1 < right and A[left] == A[right]:
                 left += 1
             mid = left + (right - left) / 2
@@ -42,5 +42,35 @@ class Solution:
             return True
         else:
             return False
-                
-                
+
+
+
+    # solution II
+    def search(self, A, target):
+        # write your code here
+
+        if A is None or len(A) == 0:
+            return False
+        start, end = 0, len(A) - 1
+        while start + 1 < end:
+            mid = (start + end) // 2
+            if A[mid] == target:
+                return True
+            if A[mid] == A[end]:
+                end -= 1
+                continue
+
+            if A[mid] < A[end]:
+                if A[mid] < target <= A[end]:
+                    start = mid
+                else:
+                    end = mid
+            else:
+                if A[mid] > target >= A[start]:
+                    end = mid
+                else:
+                    start = mid
+
+        return target in (A[start], A[end])
+
+
