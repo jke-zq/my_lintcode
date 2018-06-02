@@ -14,7 +14,7 @@ class Solution:
     """
     def postorderTraversal(self, root):
         # write your code here
-        
+
         # def doTra(node, ret):
         #     if not node:
         #         return
@@ -22,15 +22,15 @@ class Solution:
         #         doTra(node.left, ret)
         #         doTra(node.right, ret)
         #         ret.append(node.val)
-        
+
         # ret = []
         # doTra(root, ret)
         # return ret
-        
+
         # ret = []
         # if not root:
         #     return ret
-        
+
         # stack = []
         # node = root
         # while node:
@@ -68,3 +68,40 @@ class Solution:
                 stack.pop()
             pre = cur
         return ret
+
+
+"""
+Definition of TreeNode:
+class TreeNode:
+    def __init__(self, val):
+        self.val = val
+        self.left, self.right = None, None
+"""
+
+class Solution:
+    """
+    @param root: A Tree
+    @return: Postorder in ArrayList which contains node values.
+    """
+    def postorderTraversal(self, root):
+        # write your code here
+        if not root:
+            return []
+
+        ans, stack, cur = [], [], root
+        while cur or stack:
+            while cur:
+                stack.append(cur)
+                if cur.left:
+                    cur = cur.left
+                elif cur.right:
+                    cur = cur.right
+                else:
+                    cur = None
+            cur = stack.pop()
+            ans.append(cur.val)
+            if stack and stack[-1].left == cur:
+                    cur = stack[-1].right
+            else:
+                cur = None
+        return ans
