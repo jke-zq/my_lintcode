@@ -6,12 +6,12 @@ class Solution:
     """
     def maxSubArray(self, nums, k):
         # write your code here
-        
-        ## global[i][j], to i index and j subarrays 
+
+        ## global[i][j], to i index and j subarrays
         ## local[i][j].
         ## global[i][j] = max(global[i - 1][j], local[i][j])
         ## local[i][j] = max(global[i - 1][j - 1] + nums[i], local[i - 1][j] + nums[i]
-        
+
         length = len(nums)
         ## reduce the space complexity
         gl = [[float('-inf')] * (k + 1) for __ in range(2)]
@@ -34,7 +34,7 @@ class Solution:
         #     if i == 1:
         #         local[0][i] = nums[0]
         #         gl[0][i] = nums[0]
-        
+
         for i in range(1, length):
             gl[i % 2][0] = 0
             local[i % 2][0] = 0
@@ -65,7 +65,7 @@ class Solution:
     """
     def maxSubArray(self, nums, k):
         # write your code here
-        
+
         length = len(nums)
         table = [[float('-inf')] * (k + 1) for __ in range(length + 1)]
         table[0][0] = 0
@@ -79,7 +79,7 @@ class Solution:
                     local = max(local + nums[s], nums[s])
                     maxs = max(local, maxs)
                     table[i][j] = max(table[i][j], table[s][j - 1] + maxs)
-                ## TLE    
+                ## TLE
                 # local = float('-inf')
                 # maxVal = float('-inf')
                 # for s in range(0, i):
@@ -100,7 +100,7 @@ class Solution:
         #         for p in range(i, j - 1, -1):
         #             maxp = max(0, maxp) + nums[p - 1]
         #             table[i][j] = max(table[i][j], table[p - 1][j - 1] + maxp)
-                    
+
         return table[length][k]
 
 
@@ -113,7 +113,7 @@ class Solution:
     """
     def maxSubArray(self, nums, k):
         # write your code here
-        
+
         if not nums:
             return 0
         length = len(nums)
@@ -132,3 +132,27 @@ class Solution:
         # print local
         # print gl
         return gl[length][k]
+
+# ref:http://www.lintcode.com/problem/best-time-to-buy-and-sell-stock-iv/
+class Solution:
+    """
+    @param nums: A list of integers
+    @param k: An integer denote to find k non-overlapping subarrays
+    @return: An integer denote the sum of max k non-overlapping subarrays
+    """
+    def maxSubArray(self, nums, k):
+        # write your code here
+        if not nums:
+            return 0
+        length = len(nums)
+        local = [float('-inf')] * (k + 1)
+        gl = [float('-inf')] * (k + 1)
+        local[0] = 0
+        gl[0] = 0
+        for i in range(1, length + 1):
+            # diff = nums[i] - nums[i - 1]
+            diff = nums[i - 1]
+            for j in range(k, 0, -1):
+                local[j] = max(gl[j - 1] + diff, local[j] + diff)
+                gl[j] = max(gl[j], local[j])
+        return gl[k]
