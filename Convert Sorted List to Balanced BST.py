@@ -19,37 +19,44 @@ class Solution:
     """
     def sortedListToBST(self, head):
         # write your code here
-        
+
         # def helper(node, endNode):
         #     if not node or node == endNode:
         #         return None
-            
+
         #     dummy = ListNode(0)
         #     dummy.next = node
         #     slow, fast = dummy, dummy
         #     while fast != endNode and fast.next != endNode:
         #         slow, fast = slow.next, fast.next.next
-            
+
         #     root = TreeNode(slow.val)
         #     root.left = helper(node, slow)
         #     root.right = helper(slow.next, endNode)
         #     return root
         # return helper(head, None)
-        
-        # cur = head
+
+        # write your code here
+        global cur
+        cur = head
         def helper(start, end):
-            if start > end:
+            if start >= end:
                 return None
-            mid = start + (end - start) / 2
+            # if start == end:
+            #     root = TreeNode(cur.val)
+            #     cur = cur.next
+            #     return root
+            mid = start + (end - start) // 2
             left = helper(start, mid)
             # Using variable 'cur' before assignment (used-before-assignment)
             ## 闭包中不可以改变变量的值， 使用类中全局变量（加上self）
+            global cur
             root = TreeNode(cur.val)
             root.left = left
             cur = cur.next
             root.right = helper(mid + 1, end)
             return root
-            
+
         node = head
         length = 0
         while node:
