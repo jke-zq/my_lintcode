@@ -27,7 +27,7 @@ class Solution:
         # ## error: next to all the left
         # head.next = None
         # return dummy.next
-        
+
         dummy = ListNode(0)
         dummy.next = head
         cur = dummy
@@ -57,3 +57,25 @@ class Solution:
 # dummy Node 可以直接接着head，然后重新设置next指针
 # 判断是否同一类的node，根据val的大小。
 # 链表不断在后面添加next，注意最后node的next为None
+
+
+    def deleteDuplicates(self, head):
+        if None == head or None == head.next:
+            return head
+
+        new_head = ListNode(-1)
+        new_head.next = head
+        parent = new_head
+        cur = head
+        while None != cur and None != cur.next:   ### check cur.next None
+            if cur.val == cur.next.val:
+                val = cur.val
+                while None != cur and val == cur.val: ### check cur None
+                    cur = cur.next
+
+            else:
+                parent.next = cur
+                cur = cur.next
+                parent = parent.next
+        parent.next = cur
+        return new_head.next
