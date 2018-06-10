@@ -19,11 +19,11 @@ class Solution:
     """
     def bstToDoublyList(self, root):
         # Write your code here
-        
+
         def helper(treeNode):
             if not treeNode:
                 return (None, None)
-            
+
             midle = DoublyListNode(treeNode.val)
             minRet, maxRet = midle, midle
             (minLeft, maxLeft) = helper(treeNode.left)
@@ -37,6 +37,25 @@ class Solution:
             # minRet = midle if not minLeft else minLeft
             # maxRet = midle if not maxRight else maxRight
             return (minRet, maxRet)
-        
+
         return helper(root)[0]
-            
+
+    def bstToDoublyList(self, root):
+        global node, ans
+        node = DoublyListNode(0)
+        ans = node
+        # write your code here
+        def inorder(root):
+            if not root:
+                return None
+            inorder(root.left)
+            tmp = DoublyListNode(root.val)
+            global node
+            node.next = tmp
+            tmp.pre = node
+            node = tmp
+            inorder(root.right)
+
+        inorder(root)
+        return ans.next
+
