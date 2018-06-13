@@ -6,7 +6,7 @@ class Solution:
     """
     def sortColors2(self, colors, k):
         # write your code here
-        
+
         # def helper(start, end, kstart, kend, colors):
         #     if kstart >= kend or start >= end:
         #         return
@@ -25,12 +25,12 @@ class Solution:
         #     ##[pivot, left - 1] are all the kmid value
         #     helper(start, pivot - 1, kstart, kmid - 1, colors)
         #     helper(left, end, kmid + 1, kend, colors)
-        
+
         # if not colors:
         #     return None
         # length = len(colors)
         # helper(0, length - 1, 1, k, colors)
-        
+
         length = len(colors)
         for i in range(length):
             if colors[i] > 0:
@@ -44,7 +44,7 @@ class Solution:
                 else:
                     colors[colors[i] - 1] -= 1
                     colors[i] = 0
-        
+
         index = length - 1
         while k > 0:
             pos = colors[k - 1] + index + 1
@@ -52,3 +52,36 @@ class Solution:
                 colors[index] = k
                 index -= 1
             k -= 1
+
+
+class Solution:
+    """
+    @param colors: A list of integer
+    @param k: An integer
+    @return: nothing
+    """
+    def sortColors2(self, colors, k):
+        # write your code here
+        length = len(colors)
+        for i in range(length):
+            tmp = colors[i]
+            if tmp > 0:
+                colors[i] = 0
+            while tmp > 0 and colors[tmp - 1] > 0:
+                next_one = colors[tmp - 1]
+                colors[tmp - 1] = -1
+                tmp = next_one
+            if tmp <= 0:
+                continue
+            if colors[tmp - 1] <= 0:
+                colors[tmp - 1] -= 1
+        # print(colors)
+        priovt = length - 1
+        for i in range(length - 1, -1, -1):
+            while colors[priovt] >= 0:
+                priovt -= 1
+            colors[priovt] += 1
+            colors[i] = priovt + 1
+
+
+
