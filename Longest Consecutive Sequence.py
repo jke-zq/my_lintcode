@@ -50,6 +50,7 @@ class Solution:
             left = key - 1
             while left in sets:
                 count += 1
+                # TLE if not
                 sets.remove(left)
                 left -= 1
             right = key + 1
